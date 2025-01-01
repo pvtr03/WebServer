@@ -6,6 +6,7 @@ project(WebServer VERSION 1.0)
 
 set(SOURCES     src/main.cpp
                 src/socket.cpp
+                src/httpParser.cpp
 )
 
 add_executable(WebServer ${SOURCES})

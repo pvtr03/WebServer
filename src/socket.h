@@ -1,3 +1,7 @@
+#ifndef SOCKET_H
+#define SOCKET_H
+#endif
+
 #include <netinet/in.h>
 
 class Socket {
@@ -8,7 +12,7 @@ private:
 public: 
     Socket(int port);
     int acceptConnection();
-    int recieveData(int client, char* request);
+    int recieveData(int client, char* request, int size);
     void sendData(int client, const char* response);
     ~Socket(); 
 };
