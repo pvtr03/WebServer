@@ -1,118 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="""width=device-width, initial-scale=1.0">
     <title>Online Judge</title>
     <style>
-      body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-        font-family: Arial, sans-serif;
-      }
-      .container {
-        display: flex;
-        width: 80%;
-        height: 70%;
-      }
-      .code-container,
-      .input-output-container {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-      }
-      .code-box,
-      .input-box,
-      .output-box {
-        border: 1px solid #ccc;
-        padding: 10px;
-        margin: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        resize: none; /* Make the text areas non-resizable */
-        overflow: auto; /* Make the text areas scrollable */
-        white-space: pre; /* Preserve formatting and allow horizontal scrolling */
-      }
-      .code-box {
-        flex: 2;
-      }
-      .input-box,
-      .output-box {
-        flex: 1;
-      }
-      .button-container {
-        margin-top: 20px;
-      }
-      .label {
-        margin-left: 10px;
-        font-weight: bold;
-      }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            height: 70%;
+        }
+        .code-container, .input-output-container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .code-box, .input-box, .output-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            resize: none; 
+            overflow: auto;
+            white-space: pre;
+        }
+        .code-box {
+            flex: 2;
+        }
+        .input-box, .output-box {
+            flex: 1;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .label {
+            margin-left: 10px;
+            font-weight: bold;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <div class="code-container">
-        <label for="code" class="label">Code</label>
-        <textarea
-          class="code-box"
-          id="code"
-          placeholder="Enter your code here..."
-        ></textarea>
-      </div>
-      <div class="input-output-container">
-        <label for="input" class="label">Input</label>
-        <textarea
-          class="input-box"
-          id="input"
-          placeholder="Enter input here..."
-        ></textarea>
-        <label for="output" class="label">Output</label>
-        <textarea
-          class="output-box"
-          id="output"
-          placeholder="Output will be shown here..."
-          readonly
-        ></textarea>
-      </div>
+        <div class="code-container">
+            <label for="code" class="label">Code</label>
+            <textarea class="code-box" id="code" placeholder="Enter your code here..."></textarea>
+        </div>
+        <div class="input-output-container">
+            <label for="input" class="label">Input</label>
+            <textarea class="input-box" id="input" placeholder="Enter input here..."></textarea>
+            <label for="output" class="label">Output</label>
+            <textarea class="output-box" id="output" placeholder="Output will be shown here..." readonly></textarea>
+        </div>
     </div>
     <div class="button-container">
-      <button onclick="runCode()">Run</button>
+        <button onclick="runCode()">Run</button>
     </div>
 
     <script>
-      const socket = new WebSocket('ws://localhost:8080');
+        async function runCode() {
+            const code = document.getElementById('code').value;
+            const input = document.getElementById('input').value;
 
-      socket.onmessage = function(event) {
-        const data = JSON.parse(event.data);
-        if (data.output) {
-          document.getElementById('output').value = data.output;
+            try {
+                const response = await fetch('http://localhost:8080', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ code: code, input: input })
+                });
+
+                const data = await response.json();
+                document.getElementById('output').value = data.output;
+            } catch (error) {
+                console.error('Error:', error);
+            }
         }
-      };
-
-      function runCode() {
-        const code = document.getElementById('code').value;
-        const input = document.getElementById('input').value;
-
-        fetch('http://localhost:8080', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ code: code, input: input })
-        })
-        .then(response => response.json())
-        .then(data => {
-          // Assuming the server sends the ID back
-          const id = data.id;
-          socket.send(JSON.stringify({ id: id }));
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-      }
     </script>
-  </body>
+</body>
 </html>

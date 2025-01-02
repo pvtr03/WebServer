@@ -30,7 +30,8 @@ int Socket::acceptConnection() {
 }
 
 int Socket::recieveData(int client, char* request, int size) {
-    return recv(client, request, size, 0);
+    int bytes = recv(client, request, size, 0);
+    return bytes;
 }
 
 void Socket::sendData(int client, const char* response) {
