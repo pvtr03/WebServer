@@ -2,27 +2,34 @@
 #define JSON_H
 #endif
 
-#include <string>
-#include <map>
+#include <vector>
+#include <iostream>
 
 class JSON {
 public:
-    std::map<std::string, JSON*> data;
+    virtual ~JSON() {}
+    virtual void print() = 0;
 };
 
 class Integer : public JSON {
 public:
     int value;
+    void print() {
+        std::cout << value << std::endl;
+    }
 };
 
 class String : public JSON {
 public:
     std::string value;
+    void print() {
+        std::cout << value << std::endl;
+    }
 };
 
 class Array : public JSON {
 public:
-    std::vector<JSON*> data;
+    std::vector<JSON*> value;
 };
 
 

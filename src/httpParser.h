@@ -3,6 +3,7 @@
 #endif
 
 #include "json.h"
+#include <map>
 
 enum class HttpMethod {
     GET,
@@ -14,7 +15,11 @@ enum class HttpMethod {
 class HttpParser {
     HttpMethod method;
     char* path;
-    JSON data;
+    std::map<std::string, JSON*> data;
 public:
     HttpParser(char* request);
+    void parseJsonString(std::string json_string);
+    int getInteger(std::string key);
+    std::string getString(std::string key);
+    ~HttpParser();
 };
