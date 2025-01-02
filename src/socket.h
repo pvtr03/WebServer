@@ -1,6 +1,5 @@
 #ifndef SOCKET_H
 #define SOCKET_H
-#endif
 
 #include <netinet/in.h>
 
@@ -16,3 +15,5 @@ public:
     void sendData(int client, const char* response);
     ~Socket(); 
 };
+
+#endif

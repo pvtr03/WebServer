@@ -57,6 +57,9 @@ HttpParser::HttpParser(char* request) {
 }
 
 void HttpParser::parseJsonString(std::string json_string) {
+    if(json_string.size() == 0) {
+        return;
+    }
     json_string.push_back(',');
 
     std::string key, value;

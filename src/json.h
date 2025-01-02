@@ -1,6 +1,5 @@
 #ifndef JSON_H
 #define JSON_H
-#endif
 
 #include <vector>
 #include <iostream>
@@ -32,4 +31,4 @@ public:
     std::vector<JSON*> value;
 };
 
-
+#endif
