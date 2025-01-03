@@ -4,6 +4,8 @@
 #include <sstream>
 #include <cstdlib>
 #include <cstdio>
+#include <cstring>
+#include <memory>
 
 #include "socket.h" 
 #include "httpParser.h"
