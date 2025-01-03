@@ -93,7 +93,7 @@ bool compileCode(int client_socket, HttpParser& parser, Socket& server) {
     inputFileStream << input;
     inputFileStream.close();
 
-    std::string compileCommand = "g++-12 " + filename + " -o " + executable + " 2>&1";
+    std::string compileCommand = "g++ " + filename + " -o " + executable + " 2>&1";
     std::string compileOutput = exec(compileCommand.c_str());
 
     if (!compileOutput.empty()) {
