@@ -24,7 +24,7 @@ COPY . .
 RUN cmake . && make
 
 # Expose the port your web service will run on
-EXPOSE 80
+EXPOSE 8080
 
 # Command to run your application
 CMD ["./WebServer"]
