@@ -1,6 +1,7 @@
 #include "httpResponse.h"
 
 #include <sstream>
+#include <string>
 
 HttpResponse::HttpResponse(int status, std::string statusName,  std::string content) {
     size = 0;

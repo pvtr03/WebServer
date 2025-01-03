@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include <cstring> 
 
 HttpParser::HttpParser(char* request) {
     

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <unistd.h>
+#include <cstring>
 
 Socket::Socket(int port) {
     socketID = socket(AF_INET, SOCK_STREAM, 0);
