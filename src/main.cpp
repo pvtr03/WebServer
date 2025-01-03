@@ -8,6 +8,7 @@
 #include "socket.h" 
 #include "httpParser.h"
 #include "httpResponse.h"
+#include "config.h"
 
 const int BUFFER_SIZE = 10240;
 
@@ -19,7 +20,7 @@ std::string jsonify(std::string s);
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
-    Socket server(8080); 
+    Socket server(PORT); 
 
     while(true) {
         int client = server.acceptConnection();

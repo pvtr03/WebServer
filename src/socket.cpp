@@ -1,4 +1,5 @@
 #include "socket.h"
+#include "config.h"
 
 #include <iostream>
 #include <unistd.h>
@@ -19,7 +20,7 @@ Socket::Socket(int port) {
         exit(1);
     }
 
-    if (listen(socketID, 10) == -1) {
+    if (listen(socketID, MAX_CONNECTIONS) == -1) {
         std::cout << "Error listening on socket\n";
         exit(1);
     }
