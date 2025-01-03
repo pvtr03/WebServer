@@ -18,7 +18,7 @@ Socket::Socket(int port) {
     server_address.sin_addr.s_addr = INADDR_ANY;
 
     if (bind(socketID, (struct sockaddr*)&server_address, sizeof(server_address)) == -1) {
-        std::cout << "Error binding socket: " << strerror(errno) << std::endl:
+        std::cout << "Error binding socket: " << strerror(errno) << std::endl;
         exit(1);
     }
 
